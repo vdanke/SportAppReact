@@ -1,17 +1,42 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import {Provider} from "react-redux"
+import { PersistGate } from 'redux-persist/integration/react'
+import {store, persistor} from "./store"
+import ErrorBoundry from "./components/error-boundry"
+import SportServiceContext from "./components/sport-service-context"
+import {BrowserRouter as Router} from "react-router-dom"
+import App from './components/app'
+import AuthService from './service/authService'
+import TraineeService from './service/traineeService'
+import CoachService from './service/coachService'
+import PostService from './service/postService'
+import GymService from './service/gymService'
+
+const authService = new AuthService()
+const traineeService = new TraineeService()
+const postService = new PostService();
+const coachService = new CoachService();
+const gymService = new GymService();
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <ErrorBoundry>
+          <SportServiceContext.Provider
+            value={{
+              authService: authService, 
+              traineeService: traineeService,
+              postService: postService,
+              gymService: gymService,
+              coachService: coachService,
+            }}>
+            <Router>
+              <App/>
+            </Router>
+          </SportServiceContext.Provider>
+        </ErrorBoundry>
+      </PersistGate>
+    </Provider>,
+    document.getElementById('root')
+  )
