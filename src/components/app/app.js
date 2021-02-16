@@ -10,6 +10,7 @@ import Trainees from '../trainees'
 import Coaches from '../coaches'
 import Gyms from '../gyms'
 import TraineeCabinet from '../trainee-cabinet'
+import CoachCabinet from '../coach-cabinet'
 
 class App extends Component {
 
@@ -25,7 +26,8 @@ class App extends Component {
                 <Route path="/trainees" component={Trainees}/>
                 <Route path="/coaches" component={Coaches}/>
                 <Route path="/gyms" component={Gyms}/>
-                <Route path="/cabinet/trainee/" component={TraineeCabinet}/>
+                <Route path="/cabinet/trainee" component={TraineeCabinet}/>
+                <Route path="/cabinet/coach" component={CoachCabinet}/>
             </div>
         )
     }

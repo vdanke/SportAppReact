@@ -3,7 +3,7 @@ import WithSportService from '../hoc'
 import {Card, CardText, CardBody,
     CardTitle, CardSubtitle, Row, Col } from 'reactstrap'
 
-class Trainee extends Component {
+class Coach extends Component {
     render() {
         const {item} = this.props
 
@@ -17,9 +17,9 @@ class Trainee extends Component {
                         </CardBody>
                         {/* <UncontrolledCarousel className="image__list-item" autoPlay={false} items={imagesForRender} /> */}
                         <CardBody>
-                            <CardText>{item.weight}</CardText>
-                            <CardText>{item.height}</CardText>
-                            <CardText>{item.purpose}</CardText>
+                            <CardText>{item.sportClass}</CardText>
+                            <CardText>{item.category}</CardText>
+                            <CardText>{item.achievements}</CardText>
                         </CardBody>
                     </Card>
                 </Col>
@@ -28,4 +28,4 @@ class Trainee extends Component {
     }
 }
 
-export default WithSportService()(Trainee)
+export default WithSportService()(Coach)
