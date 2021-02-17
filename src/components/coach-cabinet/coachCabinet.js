@@ -15,9 +15,9 @@ class CoachCabinet extends Component {
     }
 
     componentDidMount() {
-        const {traineeService, token} = this.props
+        const {coachService, token} = this.props
 
-        traineeService.fetchTraineeCabinet("/api/v1/coaches/cabinet", {"Authorization":token, "Content-Type":"application/json"})
+        coachService.fetchCoachCabinet("/api/v1/coaches/cabinet", {"Authorization":token, "Content-Type":"application/json"})
             .then(res => res.json())
             .then(res => {
                 this.setState({
@@ -35,7 +35,7 @@ class CoachCabinet extends Component {
     handleSubmit = (event) => {
         event.preventDefault()
 
-        const {traineeService, token} = this.props
+        const {coachService, token} = this.props
         
         const {firstname, lastname, sportClass, achievements, category, phoneNumber} = this.state
 
@@ -68,9 +68,10 @@ class CoachCabinet extends Component {
                 phoneNumber: phoneNumber
         }
 
-        traineeService.updateTrainee("/api/v1/coaches", {"Authorization":token, "Content-Type":"application/json"}, updateRequest)
+        coachService.updateCoach("/api/v1/coaches", {"Authorization":token, "Content-Type":"application/json"}, updateRequest)
                 .then(res => res.json())
                 .then(res => {
+                    console.log(res)
                     this.setState({
                         username: res.username,
                         firstname: res.firstname,
@@ -126,19 +127,19 @@ class CoachCabinet extends Component {
                     <input type="text" 
                         name="sportClass" 
                         className="form-control" 
-                        placeholder={this.state.sportClass === "" ? "Purpose" : this.state.purpose} 
+                        placeholder={this.state.sportClass === "" ? "Sport Class" : this.state.sportClass} 
                         onChange={this.handleInputChanges} 
                         value={this.state.sportClass}/>
                     <input type="text" 
                         name="category" 
                         className="form-control" 
-                        placeholder={this.state.category === "" ? "Height" : this.state.height} 
+                        placeholder={this.state.category === "" ? "Category" : this.state.category} 
                         onChange={this.handleInputChanges} 
                         value={this.state.category}/>
                     <input type="text" 
                         name="achievements" 
                         className="form-control" 
-                        placeholder={this.state.achievements === "" ? "Weight" : this.state.weight} 
+                        placeholder={this.state.achievements === "" ? "Achievements" : this.state.achievements} 
                         onChange={this.handleInputChanges} 
                         value={this.state.achievements}/>
                     <button type="submit">Update profile</button>

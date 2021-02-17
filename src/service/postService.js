@@ -11,7 +11,7 @@ export default class PostService {
     addPost = async (url, headers, body) => {
         const res = await fetch(`${_defaultUrl}${url}`, {
             headers: headers,
-            body: body,
+            body: JSON.stringify(body),
             method: "POST"
         })
         if (res.status !== 201) {

@@ -8,7 +8,7 @@ class Post extends Component {
         const {item} = this.props
         return (
             <div>
-                <Row>
+                <Row key={this.props.key}>
                     <Col sm="3">
                         <Card>
                             <CardBody>

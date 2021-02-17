@@ -26,8 +26,8 @@ class Posts extends Component {
 
         const renderTraineeList = posts.map(item => {
             return (
-                <ListGroupItem key={item.id}>
-                        <Post item={item}/>
+                <ListGroupItem>
+                        <Post key={item.id} item={item}/>
                 </ListGroupItem>
             )
         })
