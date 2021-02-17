@@ -10,9 +10,9 @@ class Posts extends Component {
     }
 
     componentDidMount() {
-        const {postService} = this.props
+        const {postService, category} = this.props
 
-        postService.fetchAllPosts("/api/v1/posts")
+        postService.fetchAllPosts(`/api/v1/posts/${category}`)
             .then(res => res.json())
             .then(res => {
                 this.setState({

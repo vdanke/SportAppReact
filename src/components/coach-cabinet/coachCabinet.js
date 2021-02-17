@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import WithSportService from '../hoc'
 import {connect} from 'react-redux'
+import PostForm from '../post-form'
 
 class CoachCabinet extends Component {
     state = {
@@ -35,7 +36,7 @@ class CoachCabinet extends Component {
         event.preventDefault()
 
         const {traineeService, token} = this.props
-
+        
         const {firstname, lastname, sportClass, achievements, category, phoneNumber} = this.state
 
         let updateRequest = {
@@ -96,6 +97,7 @@ class CoachCabinet extends Component {
     render() {
         return (
             <div>
+                <PostForm/>
                 <form onSubmit={this.handleSubmit}>
                     <input type="email" 
                         name="username" 

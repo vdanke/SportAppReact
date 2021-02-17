@@ -11,6 +11,7 @@ import Coaches from '../coaches'
 import Gyms from '../gyms'
 import TraineeCabinet from '../trainee-cabinet'
 import CoachCabinet from '../coach-cabinet'
+import Posts from '../posts'
 
 class App extends Component {
 
@@ -28,6 +29,10 @@ class App extends Component {
                 <Route path="/gyms" component={Gyms}/>
                 <Route path="/cabinet/trainee" component={TraineeCabinet}/>
                 <Route path="/cabinet/coach" component={CoachCabinet}/>
+                <Route path="/posts/:name" render={({match, location}) => {
+                    const {name} = match.params
+                    return <Posts pathVariable={location.pathname} category={name}/>
+                }}/>
             </div>
         )
     }

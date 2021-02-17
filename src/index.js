@@ -12,12 +12,14 @@ import TraineeService from './service/traineeService'
 import CoachService from './service/coachService'
 import PostService from './service/postService'
 import GymService from './service/gymService'
+import CategoryService from './service/categoryService'
 
 const authService = new AuthService()
 const traineeService = new TraineeService()
 const postService = new PostService();
 const coachService = new CoachService();
 const gymService = new GymService();
+const categoryService = new CategoryService()
 
 ReactDOM.render(
     <Provider store={store}>
@@ -30,6 +32,7 @@ ReactDOM.render(
               postService: postService,
               gymService: gymService,
               coachService: coachService,
+              categoryService: categoryService
             }}>
             <Router>
               <App/>

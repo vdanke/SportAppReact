@@ -2,13 +2,31 @@ import React, {Component} from 'react'
 import WithSportService from '../hoc'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom';
-import { Navbar, NavbarBrand, Nav, NavItem } from 'reactstrap';
+import { Navbar, NavbarBrand, NavItem, NavLink, Nav, UncontrolledDropdown,
+    DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
 import {logout} from "../../actions"
 
 class Header extends Component {
+
+    state = {
+        categories: []
+    }
+
+    componentDidMount() {
+        const {categoryService} = this.props
+
+        categoryService.fetchAllCategories("/api/v1/categories")
+            .then(res => res.json())
+            .then(res => {
+                this.setState({
+                    categories: res
+                })
+            })
+    }
     
     render() {
         const {token, role, logout} = this.props
+        const {categories} = this.state
 
         const loginLogoutCabinetComponent = token && role ? 
             <div>
@@ -27,10 +45,25 @@ class Header extends Component {
                     <NavbarBrand href="/">Sport App</NavbarBrand>
                     <Nav className="mr-auto" navbar>
                         <NavItem>
-                            <Link to="/gyms/">Gyms</Link>                        
+                            <UncontrolledDropdown nav inNavbar>
+                                <DropdownToggle nav caret>
+                                    Posts
+                                </DropdownToggle>
+                                <DropdownMenu right>
+                                    {
+                                        categories.map(item => {
+                                            return (
+                                                <DropdownItem key={item.id}>
+                                                    <NavLink href={`/posts/${item.name}/`}>{item.name}</NavLink>
+                                                </DropdownItem>
+                                            )
+                                        })
+                                    }
+                                </DropdownMenu>
+                            </UncontrolledDropdown>
                         </NavItem>
                         <NavItem>
-                            <Link to="/posts/">Posts</Link>
+                            <Link to="/gyms/">Gyms</Link>                        
                         </NavItem>
                         <NavItem>
                             {role === "ROLE_TRAINEE" ? <Link to="/coaches/">Coaches</Link> : null}

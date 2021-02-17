@@ -6,7 +6,7 @@ const WithSportService = () => (Wrapped) => {
         return (
             <SportServiceContext.Consumer>
                 {
-                    ({authService, traineeService, coachService, postService, gymService}) => {
+                    ({authService, traineeService, coachService, postService, gymService, categoryService}) => {
                         return <Wrapped 
                             {...props}
                             authService={authService} 
@@ -14,6 +14,7 @@ const WithSportService = () => (Wrapped) => {
                             coachService={coachService}
                             postService={postService}
                             gymService={gymService}
+                            categoryService={categoryService}
                         />
                     }
                 }
